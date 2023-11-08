@@ -18,7 +18,7 @@ class AuthDataSourceImpl extends AuthDatasource {
     
     try {
       
-      final response = await dio.get('/auth/check-status',
+      final response = await dio.get('/api/check_auth',
         options: Options(
           headers: {
             'Authorization': token
@@ -45,7 +45,7 @@ class AuthDataSourceImpl extends AuthDatasource {
   Future<UserAuth> login(String email, String password) async {
     
     try {
-      final response = await dio.post('/auth/login', data: {
+      final response = await dio.post('/api/login', data: {
         'email': email,
         'password': password
       });
