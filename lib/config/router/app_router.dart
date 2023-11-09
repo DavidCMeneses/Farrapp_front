@@ -2,6 +2,7 @@
 
 import 'package:farrap/presentation/screens/Auth/initial_loading_screen.dart';
 import 'package:farrap/presentation/screens/Auth/login_screen.dart';
+import 'package:farrap/presentation/screens/Register/establishment_register_screen.dart';
 import 'package:farrap/presentation/screens/Home/home_screen.dart';
 import 'package:go_router/go_router.dart';
 
@@ -16,7 +17,10 @@ final appRouter = GoRouter(
     builder: (context, state) => const InitialLoadingScreen()),
     GoRoute(
     path: '/login',
-    builder: (context, state) => const LoginScreen())
+    builder: (context, state) => const LoginScreen()),
+    GoRoute(
+    path: '/establishment_register',
+    builder: (context, state) => const ERegisterScreen())
   
   ]
   );
