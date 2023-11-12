@@ -35,7 +35,9 @@ dependencies:
   flutter_dotenv: ^5.1.0
   flutter_riverpod: ^2.4.5
   formz: ^0.6.1
+  day_picker: 2.2.0
   go_router: ^12.1.0
+  time_range: 1.1.0
 
 dev_dependencies:
   flutter_lints: ^2.0.0
