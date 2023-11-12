@@ -1,6 +1,5 @@
 import 'package:day_picker/day_picker.dart';
 import 'package:flutter/material.dart';
-import 'package:farrap/presentation/widgets/time_range_selector.dart';
 import 'package:time_range_picker/time_range_picker.dart';
 
 class ServiceHoursSelector extends StatelessWidget  {
