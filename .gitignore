@@ -43,3 +43,9 @@ app.*.map.json
 /android/app/release
 
 .env
+
+.vscode
+
+generated_plugins.*
+
+generated_plugin_registrant.*
