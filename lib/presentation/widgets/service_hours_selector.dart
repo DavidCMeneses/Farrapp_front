@@ -1,12 +1,11 @@
 import 'package:day_picker/day_picker.dart';
 import 'package:flutter/material.dart';
 import 'package:farrap/presentation/widgets/time_range_selector.dart';
+import 'package:time_range_picker/time_range_picker.dart';
 
 class ServiceHoursSelector extends StatelessWidget  {
-// final String? label;
-// final List<DayInWeek> selectedDays;
-// final List<String> openingHour;
-// final List<String> clossingHour;
+// REsultados del widget: result (atributo to string returns  TimeOfDay(start) to TimeOfDay(end))
+//values: a list with strings of selected list
 
   final List<DayInWeek> _days =  [
     DayInWeek("Lun", dayKey: "monday"),
@@ -38,7 +37,7 @@ class ServiceHoursSelector extends StatelessWidget  {
       },
     );
 
-    return Column(
+    return Row(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Padding(
@@ -67,6 +66,24 @@ class ServiceHoursSelector extends StatelessWidget  {
               },
             ),
           ),
+          Center(
+          child: IconButton(
+            icon: Icon(Icons.access_alarm),
+            onPressed: () async {
+              TimeRange result = await showTimeRangePicker(
+                context: context,
+                start: TimeOfDay(hour: 17, minute: 00),
+                end: TimeOfDay(hour: 6, minute: 00),
+                interval: Duration(minutes: 30),
+                use24HourFormat: false,
+                fromText: "Hora de apertura",
+                toText: "Hora de cierre",
+                clockRotation: 180
+              );
+              print("result " + result.toString());
+            },
+          ),
+        ),
         ],
       );
   }
