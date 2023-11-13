@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
 
 class UserRadio extends StatefulWidget {
-  const UserRadio({Key? key}) : super(key: key);
+  final UserType type;
+  final Function(UserType) onChanged;
+
+  const UserRadio({super.key, required this.type, required this.onChanged});
 
   @override
   State<UserRadio> createState() => _UserRadioState();
@@ -10,7 +13,6 @@ class UserRadio extends StatefulWidget {
 enum UserType { client, establishment }
 
 class _UserRadioState extends State<UserRadio> {
-  UserType? _type = UserType.client;
 
   @override
   Widget build(BuildContext context) {
@@ -21,24 +23,16 @@ class _UserRadioState extends State<UserRadio> {
           child: RadioListTile(
               title: const Text('Persona'),
               value: UserType.client,
-              groupValue: _type,
-              onChanged: (value) {
-                setState(() {
-                  _type = value;
-                });
-              },
+              groupValue: widget.type,
+              onChanged: (value) => widget.onChanged(value?? widget.type)
             ),
         ),
         Expanded(
           child: RadioListTile(
               title: const Text('Empresa'),
               value: UserType.establishment,
-              groupValue: _type,
-              onChanged: (value) {
-                setState(() {
-                  _type = value;
-                });
-              },
+              groupValue: widget.type,
+              onChanged: (value) => widget.onChanged(value?? widget.type)
             ),
         )
         

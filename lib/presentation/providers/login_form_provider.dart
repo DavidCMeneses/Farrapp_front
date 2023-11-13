@@ -1,5 +1,7 @@
-import 'package:farrap/presentation/shared/inputs/email.dart';
+import 'package:farrap/presentation/providers/auth_provider.dart';
+import 'package:farrap/presentation/shared/inputs/userName.dart';
 import 'package:farrap/presentation/shared/inputs/password.dart';
+import 'package:farrap/presentation/widgets/user_type.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:formz/formz.dart';
 
@@ -7,11 +9,11 @@ import 'package:formz/formz.dart';
 //! 3 - StateNotifierProvider - consume afuera
 final loginFormProvider = StateNotifierProvider.autoDispose<LoginFormNotifier,LoginFormState>((ref) {
 
-  //final loginUserCallback = ref.watch(authProvider.notifier).loginUser;
+  final loginUserCallback = ref.watch(authProvider.notifier).loginUser;
 
 
   return LoginFormNotifier(
-    //loginUserCallback:loginUserCallback
+    loginUserCallback:loginUserCallback
   );
 });
 
@@ -19,15 +21,17 @@ final loginFormProvider = StateNotifierProvider.autoDispose<LoginFormNotifier,Lo
 //! 2 - Como implementamos un notifier
 class LoginFormNotifier extends StateNotifier<LoginFormState> {
 
-  //final Function(String, String) loginUserCallback;
+  final Function(String, String, UserType) loginUserCallback;
 
-  LoginFormNotifier(): super( LoginFormState() );
+  LoginFormNotifier({
+    required this.loginUserCallback,
+  }): super( LoginFormState() );
   
-  onEmailChange( String value ) {
-    final newEmail = Email.dirty(value);
+  onUsernameChanged( String value ) {
+    final newUsername = Username.dirty(value);
     state = state.copyWith(
-      email: newEmail,
-      isValid: Formz.validate([ newEmail, state.password ])
+      userName: newUsername,
+      isValid: Formz.validate([ newUsername, state.password ])
     );
   }
 
@@ -35,7 +39,14 @@ class LoginFormNotifier extends StateNotifier<LoginFormState> {
     final newPassword = Password.dirty(value);
     state = state.copyWith(
       password: newPassword,
-      isValid: Formz.validate([ newPassword, state.email ])
+      isValid: Formz.validate([ newPassword, state.userName ])
+    );
+  }
+
+  onUserTypeChanged( UserType value ) {
+    state = state.copyWith(
+      userType: value,
+      isValid: true
     );
   }
 
@@ -46,21 +57,21 @@ class LoginFormNotifier extends StateNotifier<LoginFormState> {
 
     state = state.copyWith(isPosting: true);
 
-    //await loginUserCallback( state.email.value, state.password.value );
+    await loginUserCallback( state.userName.value, state.password.value, state.userType);
 
     state = state.copyWith(isPosting: false);
   }
 
   _touchEveryField() {
 
-    final email    = Email.dirty(state.email.value);
+    final userName    = Username.dirty(state.userName.value);
     final password = Password.dirty(state.password.value);
 
     state = state.copyWith(
       isFormPosted: true,
-      email: email,
+      userName: userName,
       password: password,
-      isValid: Formz.validate([ email, password ])
+      isValid: Formz.validate([ userName, password ])
     );
 
   }
@@ -74,29 +85,33 @@ class LoginFormState {
   final bool isPosting;
   final bool isFormPosted;
   final bool isValid;
-  final Email email;
+  final Username userName;
   final Password password;
+  final UserType userType;
 
   LoginFormState({
     this.isPosting = false,
     this.isFormPosted = false,
     this.isValid = false,
-    this.email = const Email.pure(),
-    this.password = const Password.pure()
+    this.userName = const Username.pure(),
+    this.password = const Password.pure(),
+    this.userType = UserType.client
   });
 
   LoginFormState copyWith({
     bool? isPosting,
     bool? isFormPosted,
     bool? isValid,
-    Email? email,
+    Username? userName,
     Password? password,
+    UserType? userType,
   }) => LoginFormState(
     isPosting: isPosting ?? this.isPosting,
     isFormPosted: isFormPosted ?? this.isFormPosted,
     isValid: isValid ?? this.isValid,
-    email: email ?? this.email,
+    userName: userName ?? this.userName,
     password: password ?? this.password,
+    userType: userType ?? this.userType,
   );
 
   @override
@@ -106,7 +121,7 @@ class LoginFormState {
     isPosting: $isPosting
     isFormPosted: $isFormPosted
     isValid: $isValid
-    email: $email
+    userName: $userName
     password: $password
 ''';
   }

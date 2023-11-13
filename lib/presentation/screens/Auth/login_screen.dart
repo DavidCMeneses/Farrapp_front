@@ -1,3 +1,6 @@
+import 'dart:math';
+
+import 'package:farrap/presentation/providers/auth_provider.dart';
 import 'package:farrap/presentation/providers/login_form_provider.dart';
 import 'package:farrap/presentation/widgets/custom_text_form_field.dart';
 import 'package:farrap/presentation/widgets/user_type.dart';
@@ -72,26 +75,29 @@ class _LoginForm extends ConsumerWidget {
   Widget build(BuildContext context, WidgetRef ref) {
 
     final loginForm = ref.watch(loginFormProvider);
-/* 
+
     ref.listen(authProvider, (previous, next) {
       if ( next.errorMessage.isEmpty ) return;
       showSnackbar( context, next.errorMessage );
-    }); */
+    }); 
 
     return Column(
         children: [
-          const Padding(
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 10),
-            child: UserRadio()//const _LoginForm(),
+            child: UserRadio(
+              type: loginForm.userType,
+              onChanged: ref.read(loginFormProvider.notifier).onUserTypeChanged,
+            )//const _LoginForm(),
           ),
           const SizedBox( height: 15 ),
 
           CustomTextFormField(
-            label: 'Correo',
+            label: 'Usuario',
             keyboardType: TextInputType.emailAddress,
-            onChanged: ref.read(loginFormProvider.notifier).onEmailChange,
+            onChanged: ref.read(loginFormProvider.notifier).onUsernameChanged,
             errorMessage: loginForm.isFormPosted ?
-               loginForm.email.errorMessage 
+               loginForm.userName.errorMessage 
                : null,
             
           ),
@@ -113,7 +119,10 @@ class _LoginForm extends ConsumerWidget {
             height: 60,
             width: double.infinity,
             child: FilledButton(
-              onPressed: (){},
+              onPressed: loginForm.isPosting
+                ? null 
+                : ref.read(loginFormProvider.notifier).onFormSubmit
+,
               child: const Text('Ingresar'),
             )
               
@@ -127,7 +136,7 @@ class _LoginForm extends ConsumerWidget {
             children: [
               const Text('¿No tienes cuenta?'),
               TextButton(
-                onPressed: ()=> context.push('/establishment_register'), 
+                onPressed: ()=> context.push('/register'), 
                 child: const Text('Crea una aquí')
               ) 
             ],

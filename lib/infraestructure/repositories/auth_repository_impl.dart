@@ -1,6 +1,7 @@
 import 'package:farrap/domain/datasources/auth_datasource.dart';
 import 'package:farrap/domain/entities/user_auth.dart';
 import 'package:farrap/domain/repositories/auth_repository.dart';
+import 'package:farrap/presentation/widgets/user_type.dart';
 
 import '../infrastructure.dart';
 
@@ -19,8 +20,8 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<UserAuth> login(String email, String password) {
-    return dataSource.login(email, password);
+  Future<UserAuth> login(String email, String password, UserType userType) {
+    return dataSource.login(email, password, userType);
   }
 
   @override
