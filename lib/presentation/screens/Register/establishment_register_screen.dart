@@ -7,8 +7,8 @@ import 'package:go_router/go_router.dart';
 
 
 
-class ERegisterScreen extends StatelessWidget {
-  const ERegisterScreen({super.key});
+class EstablishmentRegisterScreen extends StatelessWidget {
+  const EstablishmentRegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
