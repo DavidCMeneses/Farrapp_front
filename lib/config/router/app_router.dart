@@ -4,7 +4,9 @@ import 'package:farrap/config/router/app_router_notifier.dart';
 import 'package:farrap/presentation/providers/auth_provider.dart';
 import 'package:farrap/presentation/screens/Auth/initial_loading_screen.dart';
 import 'package:farrap/presentation/screens/Auth/login_screen.dart';
-import 'package:farrap/presentation/screens/Auth/register_screen.dart';
+import 'package:farrap/presentation/screens/Register/establishment_register_screen.dart';
+import 'package:farrap/presentation/screens/Register/pre_register_screen.dart';
+import 'package:farrap/presentation/screens/Register/user_register_screen.dart';
 import 'package:farrap/presentation/screens/Home/home_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -28,9 +30,14 @@ final goRouterProvider = Provider((ref) {
       path: '/login',
       builder: (context, state) => const LoginScreen()),
       GoRoute(
-      path: '/register',
-      builder: (context, state) => const RegisterScreen()),
-    
+      path: '/userRegister',
+      builder: (context, state) => const UserRegisterScreen()),
+      GoRoute(
+      path: '/establishmentRegister',
+      builder: (context, state) => const EstablishmentRegisterScreen()),
+      GoRoute(
+      path: '/preRegister',
+      builder: (context, state) => const PreRegisterScreen()),
     ],
 
     redirect: (context, state) {
