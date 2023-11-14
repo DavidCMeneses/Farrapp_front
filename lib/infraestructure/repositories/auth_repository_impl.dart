@@ -1,4 +1,5 @@
 import 'package:farrap/domain/datasources/auth_datasource.dart';
+import 'package:farrap/domain/entities/client_user.dart';
 import 'package:farrap/domain/entities/user_auth.dart';
 import 'package:farrap/domain/repositories/auth_repository.dart';
 import 'package:farrap/presentation/widgets/user_type.dart';
@@ -25,8 +26,8 @@ class AuthRepositoryImpl extends AuthRepository {
   }
 
   @override
-  Future<UserAuth> register(Map<String,dynamic> user) {
-    return dataSource.register(user);
+  Future<UserAuth> register(ClientUser user, UserType userType) {
+    return dataSource.register(user, userType);
   }
 
 }
