@@ -1,50 +1,58 @@
 import 'package:flutter/material.dart';
 
-class GenderRadio extends StatefulWidget {
-  final GenderType type;
-  final Function(GenderType) onChanged;
-
-  const GenderRadio({super.key, required this.type, required this.onChanged});
-
-  @override
-  State<GenderRadio> createState() => _GenderRadioState();
-}
 
 enum GenderType { man, woman, other }
 
-class _GenderRadioState extends State<GenderRadio> {
+class GenderRadio extends StatelessWidget {
+  final String label;
+  final GenderType type;
+  final Function(GenderType) onChanged;
+
+  const GenderRadio({super.key, required this.label, required this.type, required this.onChanged});
+
   @override
   Widget build(BuildContext context) {
-    return SingleChildScrollView(
-      scrollDirection: Axis.horizontal,
-      child: Row(
-        children: [
-          Container(
-            width: 160,
-            child: RadioListTile(
-                title: const Text('Hombre'),
-                value: GenderType.man,
-                groupValue: widget.type,
-                onChanged: (value) => widget.onChanged(value ?? widget.type)),
-          ),
-          Container(
-            width: 160,
-            child: RadioListTile(
-                title: const Text('Mujer'),
-                value: GenderType.woman,
-                groupValue: widget.type,
-                onChanged: (value) => widget.onChanged(value ?? widget.type)),
-          ),
-          Container(
-            width: 160,
-            child: RadioListTile(
-                title: const Text('Otros'),
-                value: GenderType.other,
-                groupValue: widget.type,
-                onChanged: (value) => widget.onChanged(value ?? widget.type)),
-          )
-        ],
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(label,
+              style: const TextStyle(
+                  color: Colors.black,
+                  fontWeight: FontWeight.bold),
+            ),
+        SingleChildScrollView(
+        scrollDirection: Axis.horizontal,
+        child: Row(
+          children: [
+            Container(
+              width: 160,
+              child: RadioListTile(
+                  title: const Text('Hombre'),
+                  value: GenderType.man,
+                  groupValue: type,
+                  onChanged: (value) => onChanged(value ?? type)),
+            ),
+            Container(
+              width: 160,
+              child: RadioListTile(
+                  title: const Text('Mujer'),
+                  value: GenderType.woman,
+                  groupValue: type,
+                  onChanged: (value) => onChanged(value ?? type)),
+            ),
+            Container(
+              width: 160,
+              child: RadioListTile(
+                  title: const Text('Otros'),
+                  value: GenderType.other,
+                  groupValue: type,
+                  onChanged: (value) => onChanged(value ?? type)),
+            )
+          ],
+        ),
       ),
+      ]
     );
   }
 }
+
