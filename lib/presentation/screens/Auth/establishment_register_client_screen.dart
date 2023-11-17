@@ -1,5 +1,6 @@
 
 import 'package:farrap/presentation/providers/auth_provider.dart';
+import 'package:farrap/presentation/providers/establishment_register_form_provider.dart';
 import 'package:farrap/presentation/providers/register_form_provider.dart';
 import 'package:farrap/presentation/widgets/custom_form_birthday.dart';
 import 'package:farrap/presentation/widgets/custom_text_form_field.dart';
@@ -10,8 +11,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-class RegisterClientScreen extends StatelessWidget {
-  const RegisterClientScreen({super.key});
+class EstablishmentRegisterScreen extends StatelessWidget {
+  const EstablishmentRegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -69,7 +70,7 @@ class _RegisterForm extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final size = MediaQuery.of(context).size;
-    final registerForm = ref.watch(registerFormProvider);
+    final registerForm = ref.watch(establishmentRegisterFormProvider);
 
     ref.listen(authProvider, (previous, next) {
       if ( next.errorMessage.isEmpty ) return;
@@ -82,22 +83,11 @@ class _RegisterForm extends ConsumerWidget {
           const SizedBox( height: 15 ),
 
           CustomTextFormField(
-            label: 'Nombres',
+            label: 'Nombre del establecimiento',
             keyboardType: TextInputType.text,
-            onChanged: ref.read(registerFormProvider.notifier).onFirstNameChanged,
+            onChanged: ref.read(establishmentRegisterFormProvider.notifier).onNameChanged,
             errorMessage: registerForm.isFormPosted ?
-               registerForm.firstName.errorMessage 
-               : null,
-            
-          ),
-          const SizedBox( height: 15 ),
-
-          CustomTextFormField(
-            label: 'Apellidos',
-            keyboardType: TextInputType.text,
-            onChanged: ref.read(registerFormProvider.notifier).onLastNameChanged,
-            errorMessage: registerForm.isFormPosted ?
-               registerForm.lastName.errorMessage 
+               registerForm.name.errorMessage 
                : null,
             
           ),
@@ -106,7 +96,7 @@ class _RegisterForm extends ConsumerWidget {
           CustomTextFormField(
             label: 'Email',
             keyboardType: TextInputType.emailAddress,
-            onChanged: ref.read(registerFormProvider.notifier).onEmailChanged,
+            onChanged: ref.read(establishmentRegisterFormProvider.notifier).onEmailChanged,
             errorMessage: registerForm.isFormPosted ?
                registerForm.email.errorMessage 
                : null,
@@ -116,7 +106,7 @@ class _RegisterForm extends ConsumerWidget {
           CustomTextFormField(
             label: 'Usuario',
             keyboardType: TextInputType.text,
-            onChanged: ref.read(registerFormProvider.notifier).onUsernameChanged,
+            onChanged: ref.read(establishmentRegisterFormProvider.notifier).onUsernameChanged,
             errorMessage: registerForm.isFormPosted ?
                registerForm.userName.errorMessage 
                : null,
@@ -124,10 +114,10 @@ class _RegisterForm extends ConsumerWidget {
           ),
           const SizedBox( height: 30 ),
 
-CustomTextFormField(
+          CustomTextFormField(
             label: 'Contraseña',
             obscureText: true,
-            onChanged: ref.read(registerFormProvider.notifier).onPasswordChanged,
+            onChanged: ref.read(establishmentRegisterFormProvider.notifier).onPasswordChanged,
             errorMessage: registerForm.isFormPosted ?
                registerForm.password.errorMessage 
                : null,
@@ -139,47 +129,72 @@ CustomTextFormField(
           CustomTextFormField(
             label: 'Confirmar contraseña',
             obscureText: true,
-            onChanged: ref.read(registerFormProvider.notifier).onConfirmPasswordChanged,
+            onChanged: ref.read(establishmentRegisterFormProvider.notifier).onConfirmPasswordChanged,
             errorMessage: registerForm.isFormPosted ?
                registerForm.confirmPassword.errorMessage 
                : null,
             
           ),
 
-
           const SizedBox( height: 15 ),
-          BirthdayForm(
-            birthDateInString: registerForm.birthDate.value, 
-            keyboardType: TextInputType.datetime,
+          CustomTextFormField(
+            label: 'Dirección',
+            keyboardType: TextInputType.streetAddress,
+            onChanged: ref.read(establishmentRegisterFormProvider.notifier).onAddressChanged,
             errorMessage: registerForm.isFormPosted ?
-               registerForm.birthDate.errorMessage 
+               registerForm.address.errorMessage 
                : null,
-            onChanged: ref.read(registerFormProvider.notifier).onBirthDateChanged
-            ),
+            
+          ),
+
           const SizedBox( height: 15 ),
-          GenderRadio(
-            label: "Sexo",
-            type: registerForm.genderType, 
-            onChanged: ref.read(registerFormProvider.notifier).onGenderTypeChanged),
+          CustomTextFormField(
+            label: 'Descripción',
+            keyboardType: TextInputType.text,
+            onChanged: ref.read(establishmentRegisterFormProvider.notifier).onDescriptionChanged,
+            errorMessage: registerForm.isFormPosted ?
+               registerForm.description.errorMessage 
+               : null,
+            
+          ),
+
+          const SizedBox( height: 15 ),
+          CustomTextFormField(
+            label: 'RUT',
+            keyboardType: TextInputType.number,
+            onChanged: ref.read(establishmentRegisterFormProvider.notifier).onRutChanged,
+            errorMessage: registerForm.isFormPosted ?
+               registerForm.rut.errorMessage 
+               : null,
+            
+          ),
+
+          ServiceHoursSelector(
+            openDate: registerForm.schedule[0], 
+            closeDate: registerForm.schedule[1], 
+            weekDays: registerForm.weekDays, 
+            onWeekDaysChanged: ref.read(establishmentRegisterFormProvider.notifier).onWeekDaysChanged, 
+            onScheduleChanged: ref.read(establishmentRegisterFormProvider.notifier).onScheduleChanged),
 
           const SizedBox( height: 30 ),
-          
           ChipList(
-            label: 'Preferencias musicales', 
-            chipText: ["rock","jazz", "clfas","dsads"], 
-            width: size.width -40,
-            selectedChipList: registerForm.musicPreferences,
-            onSelectChanged: ref.read(registerFormProvider.notifier).onMusicPreferencesChanged,
-            ),
-          const SizedBox( height: 30 ),
-          ChipList(
-            label: 'Lugares de tu preferencia', 
+            label: 'Tipo de establecimiento', 
             chipText: ["gastro bar","disco", "bar","dsads","fdsafasfd"], 
             width: size.width -40,
             selectedChipList: registerForm.establishmentPreferences,
-            onSelectChanged: ref.read(registerFormProvider.notifier).onestablishmentPreferencesChanged,
+            onSelectChanged: ref.read(establishmentRegisterFormProvider.notifier).onEstablishmentPreferencesChanged,
             ),
           const SizedBox( height: 30 ),
+          
+          ChipList(
+            label: 'Música más sonada', 
+            chipText: ["rock","jazz", "clfas","dsads"], 
+            width: size.width -40,
+            selectedChipList: registerForm.musicPreferences,
+            onSelectChanged: ref.read(establishmentRegisterFormProvider.notifier).onMusicPreferencesChanged,
+            ),
+          const SizedBox( height: 30 ),
+          
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -198,7 +213,7 @@ CustomTextFormField(
             child: FilledButton(
               onPressed: registerForm.isPosting
                 ? null 
-                : ref.read(registerFormProvider.notifier).onFormSubmit
+                : ref.read(establishmentRegisterFormProvider.notifier).onFormSubmit
 ,
               child: const Text('Registrarse'),
             )
