@@ -2,6 +2,7 @@
 import 'package:dio/dio.dart';
 import 'package:farrap/config/constants/environment.dart';
 import 'package:farrap/config/constants/types.dart';
+import 'package:farrap/config/constants/types.dart';
 import 'package:farrap/domain/datasources/auth_datasource.dart';
 import 'package:farrap/domain/entities/client_user.dart';
 import 'package:farrap/domain/entities/establishment_user.dart';
@@ -23,6 +24,7 @@ class AuthDataSourceImpl extends AuthDatasource {
     try {
       
       final _ = await dio.get('/api/check_auth/',
+      final _ = await dio.get('/api/check_auth/',
         options: Options(
           headers: {
             'Authorization': 'Token $token'
@@ -30,6 +32,7 @@ class AuthDataSourceImpl extends AuthDatasource {
         )
       );
 
+      final user = UserAuth(token: token);
       final user = UserAuth(token: token);
       return user;
 
@@ -50,7 +53,9 @@ class AuthDataSourceImpl extends AuthDatasource {
 
     try {
       final response = await dio.post('/api/login/${userType.name}/', data: {
+      final response = await dio.post('/api/login/${userType.name}/', data: {
         'username': username,
+        'password': password
         'password': password
       },
       );
