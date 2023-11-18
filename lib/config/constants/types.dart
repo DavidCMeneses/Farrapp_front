@@ -5,3 +5,5 @@ const Map<GenderType, String> mapGenderType =  {
     GenderType.woman: "F",
     GenderType.other: "N"
     };
+
+const List<String> cityList = ["Bogotá", "Medellín"];

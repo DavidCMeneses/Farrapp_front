@@ -1,8 +1,10 @@
 import 'package:farrap/domain/entities/client_user.dart';
+import 'package:farrap/domain/entities/establishment_user.dart';
 import 'package:farrap/domain/entities/user_auth.dart';
 import 'package:farrap/domain/repositories/auth_repository.dart';
 import 'package:farrap/infraestructure/infrastructure.dart';
 import 'package:farrap/infraestructure/models/preference_model.dart';
+import 'package:farrap/infraestructure/models/schedule_model.dart';
 import 'package:farrap/infraestructure/services/key_value_storage_service.dart';
 import 'package:farrap/infraestructure/services/key_value_storage_service_impl.dart';
 import 'package:farrap/presentation/widgets/gender_type.dart';
@@ -43,6 +45,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
     try {
       final user = await authRepository.login(email, password, userType);
       user.userType = userType;
+      user.userType = userType;
       _setLoggedUser( user );
 
     } on CustomError catch (e) {
@@ -82,6 +85,49 @@ class AuthNotifier extends StateNotifier<AuthState> {
     
   }
 
+  void establishmentRegisterUser(
+                    String name, 
+                    String email, 
+                    String username,
+                    String password, 
+                    String address, 
+                    String city, 
+                    String description, 
+                    String playlist,
+                    String imgUrl,
+                    String rut,
+                    List<PreferenceModel> preferences,
+                    List<ScheduleModel> schedules,
+                    UserType userType) async {
+
+    await Future.delayed(const Duration(milliseconds: 500));
+
+    try {
+      final newUser = EstablishmentUser(name: name, 
+                                        email: email, 
+                                        username: username,
+                                        password: password, 
+                                        address: address, 
+                                        city: city, 
+                                        description: description, 
+                                        rut: rut, 
+                                        preferences: preferences, 
+                                        schedules: schedules, 
+                                        playlist: playlist, 
+                                        imgUrl: imgUrl, 
+                                        userType: userType);
+      final user = await authRepository.establishmentRegister(newUser, userType);
+      user.userType = userType;
+      _setLoggedUser( user );
+
+    } on CustomError catch (e) {
+      logout( e.message );
+    } catch (e){
+      logout( 'Error inesperado' );
+    }
+    
+  }
+
   void checkAuthStatus() async {
     final token = await keyValueStorageService.getValue<String>('token');
     final userType = await keyValueStorageService.getValue<String>('user_type');
@@ -90,6 +136,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
     try {
       final user = await authRepository.checkAuthStatus(token);
+      user.userType = UserType.values.firstWhere((e) => e.toString() == userType);
       user.userType = UserType.values.firstWhere((e) => e.toString() == userType);
       _setLoggedUser(user);
 
@@ -102,6 +149,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
   void _setLoggedUser( UserAuth user,  ) async {
     String nameType = user.userType?.name ?? "client";
     await keyValueStorageService.setKeyValue('token', user.token);
+    await keyValueStorageService.setKeyValue('user_type', nameType);
     await keyValueStorageService.setKeyValue('user_type', nameType);
 
     state = state.copyWith(

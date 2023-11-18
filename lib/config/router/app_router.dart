@@ -2,9 +2,9 @@
 
 import 'package:farrap/config/router/app_router_notifier.dart';
 import 'package:farrap/presentation/providers/auth_provider.dart';
+import 'package:farrap/presentation/screens/Auth/establishment_register_client_screen.dart';
 import 'package:farrap/presentation/screens/Auth/initial_loading_screen.dart';
 import 'package:farrap/presentation/screens/Auth/login_screen.dart';
-import 'package:farrap/presentation/screens/Auth/register_client_screen.dart';
 import 'package:farrap/presentation/screens/Home/home_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -29,7 +29,7 @@ final goRouterProvider = Provider((ref) {
       builder: (context, state) => const LoginScreen()),
       GoRoute(
       path: '/register',
-      builder: (context, state) => const RegisterClientScreen()),
+      builder: (context, state) => const EstablishmentRegisterScreen()),
     
     ],
 
