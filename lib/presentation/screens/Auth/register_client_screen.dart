@@ -5,7 +5,6 @@ import 'package:farrap/presentation/widgets/custom_form_birthday.dart';
 import 'package:farrap/presentation/widgets/custom_text_form_field.dart';
 import 'package:farrap/presentation/widgets/gender_type.dart';
 import 'package:farrap/presentation/widgets/horizontal_chip_selection.dart';
-import 'package:farrap/presentation/widgets/service_hours_selector.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';

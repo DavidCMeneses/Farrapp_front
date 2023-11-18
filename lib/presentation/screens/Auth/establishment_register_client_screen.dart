@@ -1,12 +1,10 @@
 
 import 'package:farrap/presentation/providers/auth_provider.dart';
 import 'package:farrap/presentation/providers/establishment_register_form_provider.dart';
-import 'package:farrap/presentation/providers/register_form_provider.dart';
-import 'package:farrap/presentation/widgets/custom_form_birthday.dart';
 import 'package:farrap/presentation/widgets/custom_text_form_field.dart';
-import 'package:farrap/presentation/widgets/gender_type.dart';
 import 'package:farrap/presentation/widgets/horizontal_chip_selection.dart';
 import 'package:farrap/presentation/widgets/service_hours_selector.dart';
+import 'package:farrap/presentation/widgets/take_photo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -193,6 +191,13 @@ class _RegisterForm extends ConsumerWidget {
             selectedChipList: registerForm.musicPreferences,
             onSelectChanged: ref.read(establishmentRegisterFormProvider.notifier).onMusicPreferencesChanged,
             ),
+          const SizedBox( height: 30 ),
+
+          TakePhoto(
+            image: registerForm.imgUrl.value,
+            onChangedImage: ref.read(establishmentRegisterFormProvider.notifier).onImgUrlChanged,
+          ),
+
           const SizedBox( height: 30 ),
           
           Row(
