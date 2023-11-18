@@ -14,6 +14,8 @@ class AuthDataSourceImpl extends AuthDatasource {
   final dio = Dio(
       BaseOptions(
         baseUrl: Environment.apiUrl,
+        connectTimeout: const Duration(seconds: 10),
+        receiveTimeout: const Duration(seconds: 10) 
       )
     );
 
@@ -113,30 +115,6 @@ class AuthDataSourceImpl extends AuthDatasource {
   @override
   Future<UserAuth> establishmentRegister(EstablishmentUser user, UserType userType) async {
     final userToSend =  user;
-    Map<String, dynamic> test = {
-        'name': userToSend.name,
-        'email': userToSend.email,
-        'username': userToSend.username,
-        'password': userToSend.password,
-        'address': userToSend.address,
-        'city': "bogota",//userToSend.city,
-        "country": 'Colombia',
-        "description": userToSend.description,
-        "rut": int.parse(userToSend.rut),
-        "verified": "false",
-        "categories": userToSend.preferences.map(
-          (e) => {
-            "type": e.type,
-            "name": e.name
-          }).toList(),
-        "schedules": userToSend.schedules.map(
-          (e) => {
-            "open": e.open,
-            "close": e.close,
-            "day": e.day
-          }).toList(),
-        
-      }; 
     try {
       final response = await dio.post('/api/signup/${userType.name}/', data: {
         'name': userToSend.name,

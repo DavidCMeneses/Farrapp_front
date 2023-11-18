@@ -1,6 +1,8 @@
 
+import 'package:farrap/config/constants/types.dart';
 import 'package:farrap/presentation/providers/auth_provider.dart';
 import 'package:farrap/presentation/providers/establishment_register_form_provider.dart';
+import 'package:farrap/presentation/widgets/custom_text_dropdown_field.dart';
 import 'package:farrap/presentation/widgets/custom_text_form_field.dart';
 import 'package:farrap/presentation/widgets/horizontal_chip_selection.dart';
 import 'package:farrap/presentation/widgets/service_hours_selector.dart';
@@ -130,6 +132,18 @@ class _RegisterForm extends ConsumerWidget {
             onChanged: ref.read(establishmentRegisterFormProvider.notifier).onConfirmPasswordChanged,
             errorMessage: registerForm.isFormPosted ?
                registerForm.confirmPassword.errorMessage 
+               : null,
+            
+          ),
+
+          const SizedBox( height: 15 ),
+          DropdownInfo(
+            label: 'Ciudad',
+            width: size.width -40,
+            dropList: cityList,
+            onChange: ref.read(establishmentRegisterFormProvider.notifier).onCityChanged,
+            errorMessage: registerForm.isFormPosted ?
+               registerForm.city.errorMessage 
                : null,
             
           ),

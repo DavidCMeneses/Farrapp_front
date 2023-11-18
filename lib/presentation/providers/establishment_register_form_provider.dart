@@ -83,7 +83,8 @@ class EstablishmentRegisterFormNotifier extends StateNotifier<EstablishmentRegis
     );
   }
 
-  onCityChanged( String value ) {
+  void onCityChanged( String? value ) {
+    if (value == null) return ;
     final newCity = DefaultString.dirty(value);
     state = state.copyWith(
       city: newCity,
@@ -223,6 +224,7 @@ class EstablishmentRegisterFormNotifier extends StateNotifier<EstablishmentRegis
     final address = DefaultString.dirty(state.address.value);
     final description = DefaultString.dirty(state.description.value);
     final rut = RUT.dirty(state.rut.value);
+    final city = DefaultString.dirty(state.city.value);
 
     state = state.copyWith(
       isFormPosted: true,
@@ -234,7 +236,8 @@ class EstablishmentRegisterFormNotifier extends StateNotifier<EstablishmentRegis
       address: address,
       description: description,
       rut: rut,
-      isValid: Formz.validate([ name, userName, password, confirmPassword, email, address, description, rut ])
+      city: city,
+      isValid: Formz.validate([ name, userName, password, confirmPassword, email, address, description, rut, city ])
     );
 
   }
