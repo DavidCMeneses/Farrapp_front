@@ -8,7 +8,6 @@ import 'package:farrap/infraestructure/models/schedule_model.dart';
 import 'package:farrap/infraestructure/services/key_value_storage_service.dart';
 import 'package:farrap/infraestructure/services/key_value_storage_service_impl.dart';
 import 'package:farrap/presentation/widgets/gender_type.dart';
-import 'package:farrap/presentation/widgets/gender_type.dart';
 import 'package:farrap/presentation/widgets/user_type.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -132,9 +131,7 @@ class AuthNotifier extends StateNotifier<AuthState> {
   void checkAuthStatus() async {
     final token = await keyValueStorageService.getValue<String>('token');
     final userType = await keyValueStorageService.getValue<String>('user_type');
-    final userType = await keyValueStorageService.getValue<String>('user_type');
     if( token == null ) return logout();
-    if( userType == null ) return logout();
     if( userType == null ) return logout();
 
     try {
@@ -150,7 +147,6 @@ class AuthNotifier extends StateNotifier<AuthState> {
   }
 
   void _setLoggedUser( UserAuth user,  ) async {
-    String nameType = user.userType?.name ?? "client";
     String nameType = user.userType?.name ?? "client";
     await keyValueStorageService.setKeyValue('token', user.token);
     await keyValueStorageService.setKeyValue('user_type', nameType);
