@@ -1,5 +1,7 @@
 import 'package:farrap/infraestructure/models/preference_model.dart';
 import 'package:farrap/infraestructure/models/schedule_model.dart';
+import 'package:farrap/infraestructure/services/cloudinary_service.dart';
+import 'package:farrap/infraestructure/services/cloudinary_service_impl.dart';
 import 'package:farrap/presentation/providers/auth_provider.dart';
 import 'package:farrap/presentation/shared/inputs/confirm_password.dart';
 import 'package:farrap/presentation/shared/inputs/default_string.dart';
@@ -17,10 +19,13 @@ import 'package:formz/formz.dart';
 final establishmentRegisterFormProvider = StateNotifierProvider.autoDispose<EstablishmentRegisterFormNotifier,EstablishmentRegisterFormState>((ref) {
 
   final establishmentRegisterUserCallback = ref.watch(authProvider.notifier).establishmentRegisterUser;
+  final cloudinaryService = CloudinaryServiceImpl();
 
 
   return EstablishmentRegisterFormNotifier(
-    registerUserCallback:establishmentRegisterUserCallback
+    registerUserCallback:establishmentRegisterUserCallback,
+    cloudinaryService: cloudinaryService
+    
   );
 });
 
@@ -29,9 +34,11 @@ final establishmentRegisterFormProvider = StateNotifierProvider.autoDispose<Esta
 class EstablishmentRegisterFormNotifier extends StateNotifier<EstablishmentRegisterFormState> {
 
   final Function(String, String, String, String, String, String, String, String, String, String, List<PreferenceModel>, List<ScheduleModel>, UserType) registerUserCallback;
+  final CloudinaryService cloudinaryService;
 
   EstablishmentRegisterFormNotifier({
     required this.registerUserCallback,
+    required this.cloudinaryService
   }): super( EstablishmentRegisterFormState() );
 
   onNameChanged( String value ) {
@@ -186,6 +193,9 @@ class EstablishmentRegisterFormNotifier extends StateNotifier<EstablishmentRegis
     preferences.addAll(preferencesMusic);
     preferences.addAll(preferencesEstablishment);
 
+    final imgURL = await cloudinaryService.uploadPhoto(state.imgUrl.value, null);
+    if (imgURL == null) return ; 
+
     await registerUserCallback( 
       state.name.value, 
       state.email.value,
@@ -195,7 +205,7 @@ class EstablishmentRegisterFormNotifier extends StateNotifier<EstablishmentRegis
       state.city.value,
       state.description.value,
       state.playlist.value,
-      state.imgUrl.value,
+      imgURL,
       state.rut.value,
       preferences,
       schedules,
