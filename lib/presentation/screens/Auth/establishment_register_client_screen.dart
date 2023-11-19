@@ -205,6 +205,17 @@ class _RegisterForm extends ConsumerWidget {
             selectedChipList: registerForm.musicPreferences,
             onSelectChanged: ref.read(establishmentRegisterFormProvider.notifier).onMusicPreferencesChanged,
             ),
+          const SizedBox( height: 15 ),
+          CustomTextFormField(
+            label: 'Url playlist',
+            keyboardType: TextInputType.url,
+            onChanged: ref.read(establishmentRegisterFormProvider.notifier).onPlayistChanged,
+            errorMessage: registerForm.isFormPosted ?
+               registerForm.playlist.errorMessage 
+               : null,
+            
+          ),
+
           const SizedBox( height: 30 ),
 
           TakePhoto(
