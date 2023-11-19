@@ -123,13 +123,14 @@ class _RegisterForm extends ConsumerWidget {
           ),
           const SizedBox( height: 30 ),
 
-CustomTextFormField(
+          CustomTextFormField(
             label: 'Contraseña',
             obscureText: true,
             onChanged: ref.read(registerFormProvider.notifier).onPasswordChanged,
             errorMessage: registerForm.isFormPosted ?
                registerForm.password.errorMessage 
                : null,
+            maxLines: 1,
             
           ),
 
@@ -142,6 +143,7 @@ CustomTextFormField(
             errorMessage: registerForm.isFormPosted ?
                registerForm.confirmPassword.errorMessage 
                : null,
+            maxLines: 1,
             
           ),
 

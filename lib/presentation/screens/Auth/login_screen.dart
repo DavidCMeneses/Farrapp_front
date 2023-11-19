@@ -104,6 +104,7 @@ class _LoginForm extends ConsumerWidget {
             errorMessage: loginForm.isFormPosted ?
                loginForm.password.errorMessage 
                : null,
+            maxLines: 1,
             
           ),
     
