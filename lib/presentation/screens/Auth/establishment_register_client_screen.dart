@@ -217,6 +217,7 @@ class _RegisterForm extends ConsumerWidget {
             errorMessage: registerForm.isFormPosted ?
                registerForm.playlist.errorMessage 
                : null,
+            maxLines: 1,
             
           ),
 

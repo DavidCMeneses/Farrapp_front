@@ -125,8 +125,8 @@ class AuthDataSourceImpl extends AuthDatasource {
         "country": 'Colombia',
         "description": userToSend.description,
         "rut": int.parse(userToSend.rut),
-        "imageUrl": userToSend.imgUrl,
-        "playlistUrl": userToSend.playlist,
+        "image_id": userToSend.imgUrl,
+        "playlist_id": userToSend.playlist,
         "verified": "false",
         "categories": userToSend.preferences.map(
           (e) => {
