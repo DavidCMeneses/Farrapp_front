@@ -8,7 +8,7 @@ class BusinessRepositoryImpl extends BusinessRepository {
   BusinessRepositoryImpl({required this.datasource});
 
   @override
-  Future<EstablishmentResult> getEstablishmentResultSearch(String token) {
-    return datasource.getEstablishmentResultSearch(token);
+  Future<EstablishmentResult> getEstablishmentResultSearch(String token, int page) {
+    return datasource.getEstablishmentResultSearch(token, page);
   }
 }

@@ -13,7 +13,7 @@ class BusinessDatasourceImpl extends BusinessDatasource {
       receiveTimeout: const Duration(seconds: 10)));
 
   @override
-  Future<EstablishmentResult> getEstablishmentResultSearch(String token) async {
+  Future<EstablishmentResult> getEstablishmentResultSearch(String token, int page) async {
     try {
       final response = await dio.get('/api/search_establishment/',
           options: Options(headers: {'Authorization': 'Token $token'}));
