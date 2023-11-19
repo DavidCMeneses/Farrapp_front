@@ -121,6 +121,7 @@ class _RegisterForm extends ConsumerWidget {
             errorMessage: registerForm.isFormPosted ?
                registerForm.password.errorMessage 
                : null,
+            maxLines: 1,
             
           ),
 
@@ -133,6 +134,7 @@ class _RegisterForm extends ConsumerWidget {
             errorMessage: registerForm.isFormPosted ?
                registerForm.confirmPassword.errorMessage 
                : null,
+            maxLines: 1,
             
           ),
 
@@ -162,11 +164,13 @@ class _RegisterForm extends ConsumerWidget {
           const SizedBox( height: 15 ),
           CustomTextFormField(
             label: 'Descripción',
-            keyboardType: TextInputType.text,
+            keyboardType: TextInputType.multiline,
             onChanged: ref.read(establishmentRegisterFormProvider.notifier).onDescriptionChanged,
             errorMessage: registerForm.isFormPosted ?
                registerForm.description.errorMessage 
                : null,
+            obscureText: false,
+            maxLines: 3,
             
           ),
 
@@ -205,6 +209,18 @@ class _RegisterForm extends ConsumerWidget {
             selectedChipList: registerForm.musicPreferences,
             onSelectChanged: ref.read(establishmentRegisterFormProvider.notifier).onMusicPreferencesChanged,
             ),
+          const SizedBox( height: 15 ),
+          CustomTextFormField(
+            label: 'Url playlist',
+            keyboardType: TextInputType.url,
+            onChanged: ref.read(establishmentRegisterFormProvider.notifier).onPlayistChanged,
+            errorMessage: registerForm.isFormPosted ?
+               registerForm.playlist.errorMessage 
+               : null,
+            maxLines: 1,
+            
+          ),
+
           const SizedBox( height: 30 ),
 
           TakePhoto(

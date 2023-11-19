@@ -7,6 +7,7 @@ import 'package:farrap/presentation/shared/inputs/confirm_password.dart';
 import 'package:farrap/presentation/shared/inputs/default_string.dart';
 import 'package:farrap/presentation/shared/inputs/email.dart';
 import 'package:farrap/presentation/shared/inputs/firstName.dart';
+import 'package:farrap/presentation/shared/inputs/playlist.dart';
 import 'package:farrap/presentation/shared/inputs/rut.dart';
 import 'package:farrap/presentation/shared/inputs/userName.dart';
 import 'package:farrap/presentation/shared/inputs/password.dart';
@@ -101,10 +102,10 @@ class EstablishmentRegisterFormNotifier extends StateNotifier<EstablishmentRegis
   }
 
   onPlayistChanged( String value ) {
-    final newPlaylist = DefaultString.dirty(value);
+    final newPlaylist = Playlist.dirty(value);
     state = state.copyWith(
       playlist: newPlaylist,
-      isValid: Formz.validate([ newPlaylist, state.password ])
+      isValid: Formz.validate([ newPlaylist ])
     );
   }
 
@@ -225,6 +226,7 @@ class EstablishmentRegisterFormNotifier extends StateNotifier<EstablishmentRegis
     final description = DefaultString.dirty(state.description.value);
     final rut = RUT.dirty(state.rut.value);
     final city = DefaultString.dirty(state.city.value);
+    final playlist = Playlist.dirty(state.playlist.value);
 
     state = state.copyWith(
       isFormPosted: true,
@@ -237,7 +239,8 @@ class EstablishmentRegisterFormNotifier extends StateNotifier<EstablishmentRegis
       description: description,
       rut: rut,
       city: city,
-      isValid: Formz.validate([ name, userName, password, confirmPassword, email, address, description, rut, city ])
+      playlist: playlist,
+      isValid: Formz.validate([ name, userName, password, confirmPassword, email, address, description, rut, city, playlist ])
     );
 
   }
@@ -258,7 +261,7 @@ class EstablishmentRegisterFormState {
   final DefaultString address;
   final DefaultString city;
   final DefaultString description;
-  final DefaultString playlist;
+  final Playlist playlist;
   final DefaultString imgUrl;
   final RUT rut;
   final List<String> musicPreferences;
@@ -280,7 +283,7 @@ class EstablishmentRegisterFormState {
     this.address = const DefaultString.pure(),
     this.city = const DefaultString.pure(),
     this.description = const DefaultString.pure(),
-    this.playlist = const DefaultString.pure(),
+    this.playlist = const Playlist.pure(),
     this.imgUrl = const DefaultString.pure(),
     this.rut = const RUT.pure(),
     this.musicPreferences =const  [] ,
@@ -302,7 +305,7 @@ class EstablishmentRegisterFormState {
     DefaultString? address,
     DefaultString? city,
     DefaultString? description,
-    DefaultString? playlist,
+    Playlist? playlist,
     DefaultString? imgUrl,
     RUT? rut,
     List<String>? musicPreferences,
