@@ -12,6 +12,7 @@ class EstablishmentResultMapper {
     establishments: resultEstablishment.results.map(
       (result) => EstablishmentCard(
         name: result.name, 
+        id: result.id,
         address: result.address, 
         city: result.city, 
         preference: result.preference, 
