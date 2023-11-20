@@ -2,6 +2,7 @@ import 'package:farrap/domain/entities/current_song.dart';
 
 class EstablishmentCard{
     final String name;
+    final String id;
     final String address;
     final String city;
     final String preference;
@@ -11,6 +12,7 @@ class EstablishmentCard{
 
   EstablishmentCard({
     required this.name, 
+    required this.id,
     required this.address, 
     required this.city, 
     required this.preference, 

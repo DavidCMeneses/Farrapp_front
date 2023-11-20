@@ -32,6 +32,7 @@ class ResultEstablishment {
 
 class Result {
     final String name;
+    final String id;
     final String address;
     final String city;
     final String preference;
@@ -41,6 +42,7 @@ class Result {
 
     Result({
         required this.name,
+        required this.id,
         required this.address,
         required this.city,
         required this.preference,
@@ -51,6 +53,7 @@ class Result {
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
         name: json["name"],
+        id: json["id"],
         address: json["address"],
         city: json["city"],
         preference: json["preference"],
@@ -61,6 +64,7 @@ class Result {
 
     Map<String, dynamic> toJson() => {
         "name": name,
+        "id": id,
         "address": address,
         "city": city,
         "preference": preference,
