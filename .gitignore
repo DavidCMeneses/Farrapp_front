@@ -49,3 +49,8 @@ app.*.map.json
 generated_plugins.*
 
 generated_plugin_registrant.*
+
+linux/flutter/generated_plugin_registrant.cc
+windows/flutter/generated_plugins.cmake
+macos/Flutter/GeneratedPluginRegistrant.swift
+linux/flutter/generated_plugin_registrant.h
