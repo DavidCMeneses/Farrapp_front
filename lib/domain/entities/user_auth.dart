@@ -3,7 +3,7 @@ import 'package:farrap/presentation/widgets/user_type.dart';
 class UserAuth {
 
   //final String userName;
-  final UserType? userType;
+  UserType? userType;
   final String token;
 
   UserAuth({

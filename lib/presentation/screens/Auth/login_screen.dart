@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:farrap/presentation/providers/auth_provider.dart';
 import 'package:farrap/presentation/providers/login_form_provider.dart';
@@ -21,34 +20,29 @@ class LoginScreen extends StatelessWidget {
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
-      child:  Scaffold(
+      child:  const Scaffold(
         body: SingleChildScrollView(
-            physics: const ClampingScrollPhysics(),
+            physics: ClampingScrollPhysics(),
             child: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 20),
+              padding: EdgeInsets.symmetric(horizontal: 20),
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  const SizedBox( height: 200 ),
+                  SizedBox( height: 200 ),
                   // Icon Banner
-                  const Text('Ingresar', 
+                  Text('Ingresar', 
                     style: TextStyle(
                       fontSize: 30)),
                   
-                  const SizedBox( height: 15 ),
+                  SizedBox( height: 15 ),
                   
-                  const Text('Hola ¿Listo para pasarla genial?', 
+                  Text('Hola ¿Listo para pasarla genial?', 
                     style: TextStyle(
                       fontSize: 20)),
                   
-                  const SizedBox( height: 15 ),
+                  SizedBox( height: 15 ),
                   
-                  Container(
-                    child: const _LoginForm(),
-                  )
-
-                  
-
+                  _LoginForm()
                   
                 ],
               ),
@@ -110,6 +104,7 @@ class _LoginForm extends ConsumerWidget {
             errorMessage: loginForm.isFormPosted ?
                loginForm.password.errorMessage 
                : null,
+            maxLines: 1,
             
           ),
     
