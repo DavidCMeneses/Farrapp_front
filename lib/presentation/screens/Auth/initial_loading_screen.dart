@@ -1,7 +1,6 @@
 import 'package:farrap/presentation/providers/auth_provider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:go_router/go_router.dart';
 
 class InitialLoadingScreen extends ConsumerWidget {
   const InitialLoadingScreen({super.key});
@@ -11,11 +10,11 @@ class InitialLoadingScreen extends ConsumerWidget {
 
     ref.listen(authProvider, (previous, next) {
       if ( next.authStatus ==  AuthStatus.authenticated ) {
-        Future.delayed(Duration(seconds: 3), () {
+        Future.delayed(const Duration(seconds: 3), () {
           context.go('/');
         });
       }
-      Future.delayed(Duration(seconds: 3), () {
+      Future.delayed(const Duration(seconds: 3), () {
       context.go('/');
     });
     }); 
