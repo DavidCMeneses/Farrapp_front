@@ -7,9 +7,10 @@ import 'package:farrap/presentation/widgets/gender_type.dart';
 import 'package:farrap/presentation/widgets/horizontal_chip_selection.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
-class RegisterClientScreen extends StatelessWidget {
-  const RegisterClientScreen({super.key});
+class ClientRegisterScreen extends StatelessWidget {
+  const ClientRegisterScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -166,7 +167,7 @@ class _RegisterForm extends ConsumerWidget {
           
           ChipList(
             label: 'Preferencias musicales', 
-            chipText: ["rock","jazz", "clfas","dsads"], 
+            chipText: const ["rock","jazz", "clfas","dsads"], 
             width: size.width -40,
             selectedChipList: registerForm.musicPreferences,
             onSelectChanged: ref.read(registerFormProvider.notifier).onMusicPreferencesChanged,
@@ -174,7 +175,7 @@ class _RegisterForm extends ConsumerWidget {
           const SizedBox( height: 30 ),
           ChipList(
             label: 'Lugares de tu preferencia', 
-            chipText: ["gastro bar","disco", "bar","dsads","fdsafasfd"], 
+            chipText: const ["gastro bar","disco", "bar","dsads","fdsafasfd"], 
             width: size.width -40,
             selectedChipList: registerForm.establishmentPreferences,
             onSelectChanged: ref.read(registerFormProvider.notifier).onestablishmentPreferencesChanged,

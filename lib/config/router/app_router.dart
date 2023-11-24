@@ -3,11 +3,10 @@
 import 'package:farrap/config/router/app_router_notifier.dart';
 import 'package:farrap/presentation/providers/auth_provider.dart';
 import 'package:farrap/presentation/screens/Auth/establishment_register_client_screen.dart';
+import 'package:farrap/presentation/screens/Auth/pre_register_screen.dart';
+import 'package:farrap/presentation/screens/Auth/register_client_screen.dart';
 import 'package:farrap/presentation/screens/Auth/initial_loading_screen.dart';
 import 'package:farrap/presentation/screens/Auth/login_screen.dart';
-import 'package:farrap/presentation/screens/Register/establishment_register_screen.dart';
-import 'package:farrap/presentation/screens/Register/pre_register_screen.dart';
-import 'package:farrap/presentation/screens/Register/user_register_screen.dart';
 import 'package:farrap/presentation/screens/Home/home_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
@@ -31,8 +30,8 @@ final goRouterProvider = Provider((ref) {
       path: '/login',
       builder: (context, state) => const LoginScreen()),
       GoRoute(
-      path: '/userRegister',
-      builder: (context, state) => const UserRegisterScreen()),
+      path: '/clientRegister',
+      builder: (context, state) => const ClientRegisterScreen()),
       GoRoute(
       path: '/establishmentRegister',
       builder: (context, state) => const EstablishmentRegisterScreen()),
@@ -49,13 +48,13 @@ final goRouterProvider = Provider((ref) {
       if ( isGoingTo == '/initial_loading' && authStatus == AuthStatus.checking ) return null;
 
       if ( authStatus == AuthStatus.notAuthenticated ) {
-        if ( isGoingTo == '/login' || isGoingTo == '/register' || isGoingTo == '/initial_loading' ) return null;
+        if ( isGoingTo == '/login' || isGoingTo == '/clientRegister' || isGoingTo == '/establishmentRegister'|| isGoingTo == '/preRegister' || isGoingTo == '/initial_loading' ) return null;
 
         return '/login';
       }
 
       if ( authStatus == AuthStatus.authenticated ) {
-        if ( isGoingTo == '/login' || isGoingTo == '/register' ){
+        if ( isGoingTo == '/login' || isGoingTo == '/preRegister' || isGoingTo == '/clientRegister' || isGoingTo == '/establishmentRegister' ){
            return '/';
         }
       }

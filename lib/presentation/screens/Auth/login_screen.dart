@@ -5,6 +5,7 @@ import 'package:farrap/presentation/widgets/custom_text_form_field.dart';
 import 'package:farrap/presentation/widgets/user_type.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:go_router/go_router.dart';
 
 
 
@@ -77,7 +78,7 @@ class _LoginForm extends ConsumerWidget {
     return Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: UserRadio(
               type: loginForm.userType,
               onChanged: ref.read(loginFormProvider.notifier).onUserTypeChanged,
