@@ -6,6 +6,8 @@ import 'package:farrap/presentation/screens/Auth/establishment_register_client_s
 import 'package:farrap/presentation/screens/Auth/initial_loading_screen.dart';
 import 'package:farrap/presentation/screens/Auth/login_screen.dart';
 import 'package:farrap/presentation/screens/Home/home_screen.dart';
+import 'package:farrap/presentation/screens/Home/profile_screen.dart';
+import 'package:farrap/presentation/screens/Home/search_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
@@ -30,6 +32,12 @@ final goRouterProvider = Provider((ref) {
       GoRoute(
       path: '/register',
       builder: (context, state) => const EstablishmentRegisterScreen()),
+      GoRoute(
+        path: '/search',
+        builder: (context, state) => const SearchScreen()),
+      GoRoute(
+        path: '/profile',
+        builder: (context, state) => const ProfileScreen()),
     
     ],
 
