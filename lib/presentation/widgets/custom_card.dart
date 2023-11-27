@@ -34,7 +34,7 @@ class CustomCard extends StatelessWidget {
             child: ClipRRect(
               borderRadius: BorderRadius.circular(15),
               child: GestureDetector(
-                onTap: () => context.push('/${establishmentCard.id}'),
+                onTap: () => context.push('/establishment/${establishmentCard.id}'),
                 child: FadeInImage(
                     height: 180,
                     width: MediaQuery.of(context).size.width - 20,
