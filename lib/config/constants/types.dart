@@ -6,4 +6,14 @@ const Map<GenderType, String> mapGenderType =  {
     GenderType.other: "N"
     };
 
+const Map<String, String> mapperDays =  {
+    "monday":"Lun",
+    "tuesday":"Mar",
+    "wednesday":"Mie",
+    "thursday":"Jue",
+    "friday":"Vie",
+    "saturday":"Sab",
+    "sunday":"Dom",
+};
+
 const List<String> cityList = ["Bogotá", "Medellín"];
