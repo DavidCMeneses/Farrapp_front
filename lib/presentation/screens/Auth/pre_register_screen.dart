@@ -36,11 +36,13 @@ class PreRegisterScreen extends StatelessWidget {
 }
 
 class _PreRegisterForm extends ConsumerWidget {
+
   const _PreRegisterForm();
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final preRegisterForm = ref.watch(loginFormProvider);
+
+    final preRegisterForm = ref.watch(preRegisterFormProvider);
 
     return Column(children: [
       Padding(
