@@ -48,7 +48,9 @@ class HomeNotifier extends StateNotifier<EstablishmentResult> {
     isLoading = true;
 
     currentPage++;
-    if (currentPage > state.totalPages) return;
+    if (currentPage > state.totalPages) {
+      isLoading = false;
+      return;};
 
     EstablishmentResult establishmentsResult;
     
@@ -69,6 +71,7 @@ class HomeNotifier extends StateNotifier<EstablishmentResult> {
       }
       
     } catch (e) {
+      isLoading = false;
       return;
     }
 
