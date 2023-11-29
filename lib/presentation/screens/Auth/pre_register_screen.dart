@@ -1,4 +1,3 @@
-import 'package:farrap/presentation/providers/login_form_provider.dart';
 import 'package:farrap/presentation/providers/pre_register_provider.dart';
 import 'package:farrap/presentation/widgets/user_type.dart';
 import 'package:flutter/material.dart';
@@ -58,10 +57,14 @@ class _PreRegisterForm extends ConsumerWidget {
           child: FilledButton(
             onPressed: () {
               if (!preRegisterForm.isPosting) {
-                if (preRegisterForm.userType == UserType.establishment) {
-                  context.push('/establishmentRegister');
-                }
-                context.push('/clientRegister');
+                switch(preRegisterForm.userType){
+                  case UserType.establishment:
+                    context.push('/establishmentRegister');
+                    break;
+                  case UserType.client:
+                    context.push('/clientRegister');
+
+                }               
               }
             },
             child: const Text('Siguiente'),
