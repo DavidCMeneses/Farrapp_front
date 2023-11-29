@@ -12,7 +12,7 @@ import 'package:go_router/go_router.dart';
 class ProfileScreen extends ConsumerWidget {
   const ProfileScreen({super.key});
 
-  static const List<Widget> _widgetOptions = <Widget>[
+  static  const List<Widget> _widgetOptions = <Widget>[
     EditProfileScreen(),
     LogOutScreen()
   ];
@@ -20,7 +20,7 @@ class ProfileScreen extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
 
-    final currentPage = ref.watch(sideMenuProvider); 
+    final sideMenu = ref.watch(sideMenuProvider); 
 
     return GestureDetector(
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
@@ -29,14 +29,16 @@ class ProfileScreen extends ConsumerWidget {
           title: const Text('Perfil', style: TextStyle(fontSize: 30)),
         ),
       drawer: const SideMenu(),
-        body: const SingleChildScrollView(
+        body:  SingleChildScrollView(
           physics: ClampingScrollPhysics(),
           child: Padding(
             padding: EdgeInsets.symmetric(horizontal: 20),
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Center( child:EditProfileScreen(),),
+                Center( 
+                  child:  _widgetOptions[sideMenu.currentPageIndex] ,
+                  ), 
               ],
             ),
           ),
