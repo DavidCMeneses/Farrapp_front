@@ -12,7 +12,7 @@ class ProfileScreen extends ConsumerWidget {
         title: const Text('Profile'),
       ),
       body: const Placeholder(),
-      bottomNavigationBar: CustomBottomNavigation(currentIndex: 2),
+      bottomNavigationBar: const CustomBottomNavigation(currentIndex: 2),
     );
   }
 }

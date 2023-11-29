@@ -167,7 +167,7 @@ class _RegisterForm extends ConsumerWidget {
           
           ChipList(
             label: 'Preferencias musicales', 
-            chipText: ["rock","jazz", "clfas","dsads"], 
+            chipText: const ["rock","jazz", "clfas","dsads"], 
             width: size.width -40,
             selectedChipList: registerForm.musicPreferences,
             onSelectChanged: ref.read(registerFormProvider.notifier).onMusicPreferencesChanged,
@@ -175,7 +175,7 @@ class _RegisterForm extends ConsumerWidget {
           const SizedBox( height: 30 ),
           ChipList(
             label: 'Lugares de tu preferencia', 
-            chipText: ["gastro bar","disco", "bar","dsads","fdsafasfd"], 
+            chipText: const ["gastro bar","disco", "bar","dsads","fdsafasfd"], 
             width: size.width -40,
             selectedChipList: registerForm.establishmentPreferences,
             onSelectChanged: ref.read(registerFormProvider.notifier).onestablishmentPreferencesChanged,

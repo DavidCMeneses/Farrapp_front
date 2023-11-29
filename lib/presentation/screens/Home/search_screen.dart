@@ -13,7 +13,7 @@ class SearchScreen extends ConsumerWidget {
         title: const Text('Search'),
       ),
       body: const Placeholder(),
-      bottomNavigationBar: CustomBottomNavigation(currentIndex: 1),
+      bottomNavigationBar: const CustomBottomNavigation(currentIndex: 1),
     );
   }
 }

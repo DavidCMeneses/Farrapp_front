@@ -78,7 +78,7 @@ class _LoginForm extends ConsumerWidget {
     return Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: UserRadio(
               type: loginForm.userType,
               onChanged: ref.read(loginFormProvider.notifier).onUserTypeChanged,

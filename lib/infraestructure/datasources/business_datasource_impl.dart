@@ -5,8 +5,6 @@ import 'package:farrap/domain/entities/current_song.dart';
 import 'package:farrap/domain/entities/establishment_card.dart';
 import 'package:farrap/domain/entities/establishment_result.dart';
 import 'package:farrap/infraestructure/infrastructure.dart';
-import 'package:farrap/infraestructure/mappers/establishment_result_mapper.dart';
-import 'package:farrap/infraestructure/models/result_establishment_model.dart';
 
 class BusinessDatasourceImpl extends BusinessDatasource {
   final dio = Dio(BaseOptions(
