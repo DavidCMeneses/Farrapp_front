@@ -7,6 +7,8 @@ import 'package:farrap/presentation/screens/Auth/pre_register_screen.dart';
 import 'package:farrap/presentation/screens/Auth/register_client_screen.dart';
 import 'package:farrap/presentation/screens/Auth/initial_loading_screen.dart';
 import 'package:farrap/presentation/screens/Auth/login_screen.dart';
+import 'package:farrap/presentation/screens/Home/establishment_home_screen.dart';
+import 'package:farrap/presentation/screens/Home/establishment_profile_screen.dart';
 import 'package:farrap/presentation/screens/Home/establishment_screen.dart';
 import 'package:farrap/presentation/screens/Home/filter_screen.dart';
 import 'package:farrap/presentation/screens/Home/home_screen.dart';
@@ -46,17 +48,27 @@ final goRouterProvider = Provider((ref) {
             return EstablishmentScreen( establishmentId: establishmentId );
           },),
       GoRoute(
+      path: '/establishment/home/:id',
+      builder: (context, state) {
+            final establishmentId = state.pathParameters['id'] ?? '1';
+
+            return EstablishmentHomeScreen( establishmentId: establishmentId );
+          },),
+      GoRoute(
       path: '/pre_register',
       builder: (context, state) => const PreRegisterScreen()),
       GoRoute(
         path: '/search',
         builder: (context, state) => const SearchScreen()),
       GoRoute(
-        path: '/profile',
+        path: '/client_profile',
         builder: (context, state) => const ProfileScreen()),
       GoRoute(
         path: '/filter',
         builder: (context, state) => const FilterScreen()),
+      GoRoute(
+        path: '/establishment_profile',
+        builder: (context, state) => const EstablishmentProfileScreen()),
     
     ],
 
@@ -68,14 +80,14 @@ final goRouterProvider = Provider((ref) {
       if ( isGoingTo == '/initial_loading' && authStatus == AuthStatus.checking ) return null;
 
       if ( authStatus == AuthStatus.notAuthenticated ) {
-        if ( isGoingTo == '/login' || isGoingTo == '/client_register' || isGoingTo == '/establishment_register'|| isGoingTo == '/pre_register' || isGoingTo == '/initial_loading' || isGoingTo == '/filter' ) return null;
+        if ( isGoingTo == '/login' || isGoingTo == '/client_register' || isGoingTo == '/establishment_register'|| isGoingTo == '/pre_register' || isGoingTo == '/initial_loading' || isGoingTo == '/filter' || isGoingTo == '/establishment_profile') return null;
 
         return '/login';
       }
 
 
       if ( authStatus == AuthStatus.authenticated ) {
-        if(isGoingTo == '/establishment_register') {
+        if(isGoingTo == '/pre_register') {
           return '/';
         }
         if ( isGoingTo == '/login' || isGoingTo == '/register' ){
@@ -83,7 +95,7 @@ final goRouterProvider = Provider((ref) {
           final userType = await keyValueStorageServiceImpl.getValue<String>("user_type");
           if (userType == "establishment"){
             final userId = await keyValueStorageServiceImpl.getValue<int>("id");
-            return '/establishment/$userId';
+            return '/establishment/home/$userId';
           } 
           return '/';
         }
