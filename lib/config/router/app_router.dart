@@ -8,6 +8,7 @@ import 'package:farrap/presentation/screens/Auth/register_client_screen.dart';
 import 'package:farrap/presentation/screens/Auth/initial_loading_screen.dart';
 import 'package:farrap/presentation/screens/Auth/login_screen.dart';
 import 'package:farrap/presentation/screens/Home/establishment_screen.dart';
+import 'package:farrap/presentation/screens/Home/filter_screen.dart';
 import 'package:farrap/presentation/screens/Home/home_screen.dart';
 import 'package:farrap/presentation/screens/Home/profile_screen.dart';
 import 'package:farrap/presentation/screens/Home/search_screen.dart';
@@ -53,6 +54,9 @@ final goRouterProvider = Provider((ref) {
       GoRoute(
         path: '/profile',
         builder: (context, state) => const ProfileScreen()),
+      GoRoute(
+        path: '/filter',
+        builder: (context, state) => const FilterScreen()),
     
     ],
 
@@ -64,7 +68,7 @@ final goRouterProvider = Provider((ref) {
       if ( isGoingTo == '/initial_loading' && authStatus == AuthStatus.checking ) return null;
 
       if ( authStatus == AuthStatus.notAuthenticated ) {
-        if ( isGoingTo == '/login' || isGoingTo == '/client_register' || isGoingTo == '/establishment_register'|| isGoingTo == '/pre_register' || isGoingTo == '/initial_loading' ) return null;
+        if ( isGoingTo == '/login' || isGoingTo == '/client_register' || isGoingTo == '/establishment_register'|| isGoingTo == '/pre_register' || isGoingTo == '/initial_loading' || isGoingTo == '/filter' ) return null;
 
         return '/login';
       }

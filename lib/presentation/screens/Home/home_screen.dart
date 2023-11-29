@@ -1,5 +1,6 @@
 
 import 'package:farrap/presentation/providers/establishment_view_provider.dart';
+import 'package:farrap/presentation/widgets/custom_action_button.dart';
 import 'package:farrap/presentation/widgets/custom_card.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -15,7 +16,8 @@ class HomeScreen extends StatelessWidget {
         title: const Text('Farrapp'),
       ),
       body: const _HomeView(),
-      floatingActionButton: IconButton(onPressed: () {}, icon: const Icon(Icons.headset)),
+      floatingActionButton: CustomActionButton(),
+      floatingActionButtonLocation: FloatingActionButtonLocation.centerFloat,
       bottomNavigationBar: const CustomBottomNavigation(currentIndex: 0),
     );
   }

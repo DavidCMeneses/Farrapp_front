@@ -67,26 +67,6 @@ class BusinessDatasourceImpl extends BusinessDatasource {
       final establishmentEntity = EstablishmentMapper.establishmentToEntity(establishmentModel);
       return establishmentEntity;
       
-/*
-      return Establishment(
-        name: "THEATRON", 
-        address: "Cl. 58 #10-32", 
-        city: "Bogotá", 
-        description: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque quis tellus commodo, consequat nibh blandit, tristique est. Nunc accumsan tortor vel justo suscipit venenatis. Etiam efficitur dictum tincidunt. Ut pretium iaculis arcu, vel semper risus viverra ut.", 
-        rating: 4.3, 
-        preferences: [Preference(type: "M", name: "pop"), Preference(type: "E", name: "club"), Preference(type: "M", name: "pop2"), Preference(type: "M", name: "pop3")], 
-        imageUrl: "https://res.cloudinary.com/dd0xlct8p/image/upload/v1700423033/farrapp/ituk80ctjqsmglfvjtze.jpg", 
-        playlist: Playlist(name: "playlist", songs: [
-          CurrentSongCard(name: "name", author: "author",url: "aaaa"),
-          CurrentSongCard(name: "name", author: "author",url: "aaaa"),
-          CurrentSongCard(name: "name", author: "author",url: "aaaa"),
-          CurrentSongCard(name: "name", author: "author",url: "aaaa"),
-          CurrentSongCard(name: "name", author: "author",url: "aaaa"),
-          CurrentSongCard(name: "name", author: "author",url: "aaaa"),
-          ]), 
-        schedule: [Schedule(day: 'monday', open: '16:20', close: '19:20')], 
-        userRating: -1);
-        */
       
       
     } on DioException catch (e) {
