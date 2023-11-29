@@ -11,11 +11,11 @@ class InitialLoadingScreen extends ConsumerWidget {
 
     ref.listen(authProvider, (previous, next) {
       if ( next.authStatus ==  AuthStatus.authenticated ) {
-        Future.delayed(Duration(seconds: 3), () {
+        Future.delayed(const Duration(seconds: 3), () {
           context.go('/');
         });
       }
-      Future.delayed(Duration(seconds: 3), () {
+      Future.delayed(const Duration(seconds: 3), () {
       context.go('/');
     });
     }); 
