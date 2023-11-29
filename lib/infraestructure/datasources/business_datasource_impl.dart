@@ -22,7 +22,7 @@ class BusinessDatasourceImpl extends BusinessDatasource {
                                                           String musicFilter, 
                                                           String establishmentFilter,
                                                           String sortedBy,
-                                                          bool flag, 
+                                                          String flag, 
                                                           int page) async {
 
     final Map<String, dynamic> pathParameters = {

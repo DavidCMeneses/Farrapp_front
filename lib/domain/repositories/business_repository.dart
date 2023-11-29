@@ -7,7 +7,7 @@ abstract class BusinessRepository{
                                                           String musicFilter, 
                                                           String establishmentFilter,
                                                           String sortedBy,
-                                                          bool flag, 
+                                                          String flag, 
                                                           int page);
   Future<Establishment> getEstablishmentFromId(String token, String id);
   Future<bool> saveRating(String token, String establishmentId, int rating);

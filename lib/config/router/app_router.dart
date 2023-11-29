@@ -26,8 +26,12 @@ final goRouterProvider = Provider((ref) {
     refreshListenable: goRouterNotifier,
     routes: [
       GoRoute(
+        name: "home",
         path: '/',
-        builder: (context, state) => const HomeScreen()),
+        builder: (context, state) {
+          
+          return const HomeScreen();
+          }),
       GoRoute(
       path: '/initial_loading',
       builder: (context, state) => const InitialLoadingScreen()),

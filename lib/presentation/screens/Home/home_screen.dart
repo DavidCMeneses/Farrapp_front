@@ -37,12 +37,12 @@ class _HomeViewState extends ConsumerState<_HomeView> {
   void initState() {
     super.initState();
 
-    ref.read(homeProvider.notifier).loadNextPage();
+    ref.read(homeProvider.notifier).loadNextPage(null);
 
     scrollController.addListener(() {
       if ((scrollController.position.pixels + 200) >=
           scrollController.position.maxScrollExtent) {
-        ref.read(homeProvider.notifier).loadNextPage();
+        ref.read(homeProvider.notifier).loadNextPage(null);
       }
     });
   }
