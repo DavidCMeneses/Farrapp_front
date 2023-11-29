@@ -59,10 +59,10 @@ class _PreRegisterForm extends ConsumerWidget {
               if (!preRegisterForm.isPosting) {
                 switch(preRegisterForm.userType){
                   case UserType.establishment:
-                    context.push('/establishmentRegister');
+                    context.push('/establishment_register');
                     break;
                   case UserType.client:
-                    context.push('/clientRegister');
+                    context.push('/client_register');
 
                 }               
               }

@@ -131,7 +131,7 @@ class _LoginForm extends ConsumerWidget {
             children: [
               const Text('¿No tienes cuenta?'),
               TextButton(
-                onPressed: ()=> context.push('/preRegister'), 
+                onPressed: ()=> context.push('/pre_register'), 
                 child: const Text('Crea una aquí')
               ) 
             ],
