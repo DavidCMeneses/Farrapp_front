@@ -52,8 +52,8 @@ class FilterNotifier extends StateNotifier<FilterState> {
   }
 
   String onFormSubmit() {
-    final filterMusic = state.filterMusic.join("%7C");
-    final filterEstablishment = state.filterEstablishment.join("%7C");
+    final filterMusic = state.filterMusic.join("|");
+    final filterEstablishment = state.filterEstablishment.join("|");
     final filters = "$filterMusic-$filterEstablishment-${state.sortType.name}-${state.flag}";
 
     return filters;
