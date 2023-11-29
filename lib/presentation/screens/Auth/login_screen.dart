@@ -78,7 +78,7 @@ class _LoginForm extends ConsumerWidget {
     return Column(
         children: [
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 10),
+            padding: const EdgeInsets.symmetric(horizontal: 10),
             child: UserRadio(
               type: loginForm.userType,
               onChanged: ref.read(loginFormProvider.notifier).onUserTypeChanged,
@@ -131,7 +131,7 @@ class _LoginForm extends ConsumerWidget {
             children: [
               const Text('¿No tienes cuenta?'),
               TextButton(
-                onPressed: ()=> context.push('/register'), 
+                onPressed: ()=> context.push('/pre_register'), 
                 child: const Text('Crea una aquí')
               ) 
             ],

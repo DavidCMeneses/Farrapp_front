@@ -62,8 +62,8 @@ class BirthdayForm extends StatelessWidget {
                 keyboardType: TextInputType.datetime,
                 style: const TextStyle( fontSize: 20, color: Colors.black87 ),
                 decoration: InputDecoration(
-                  contentPadding: EdgeInsets.all( 10),
-                  labelStyle: TextStyle(color: Colors.black),
+                  contentPadding: const EdgeInsets.all( 10),
+                  labelStyle: const TextStyle(color: Colors.black),
                   floatingLabelStyle: const TextStyle(color: Colors.black, fontWeight: FontWeight.bold, fontSize: 18),
                   enabledBorder: border,
                   focusedBorder: border,

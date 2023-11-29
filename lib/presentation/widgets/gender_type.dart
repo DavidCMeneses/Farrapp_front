@@ -24,7 +24,7 @@ class GenderRadio extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         child: Row(
           children: [
-            Container(
+            SizedBox(
               width: 160,
               child: RadioListTile(
                   title: const Text('Hombre'),
@@ -32,7 +32,7 @@ class GenderRadio extends StatelessWidget {
                   groupValue: type,
                   onChanged: (value) => onChanged(value ?? type)),
             ),
-            Container(
+            SizedBox(
               width: 160,
               child: RadioListTile(
                   title: const Text('Mujer'),
@@ -40,7 +40,7 @@ class GenderRadio extends StatelessWidget {
                   groupValue: type,
                   onChanged: (value) => onChanged(value ?? type)),
             ),
-            Container(
+            SizedBox(
               width: 160,
               child: RadioListTile(
                   title: const Text('Otros'),
