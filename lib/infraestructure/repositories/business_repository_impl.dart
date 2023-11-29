@@ -14,7 +14,7 @@ class BusinessRepositoryImpl extends BusinessRepository {
                                                           String musicFilter, 
                                                           String establishmentFilter,
                                                           String sortedBy,
-                                                          bool flag, 
+                                                          String flag, 
                                                           int page) {
     return datasource.getEstablishmentResultSearch(token, 
                                                   query, 

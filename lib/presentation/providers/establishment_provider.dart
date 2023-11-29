@@ -35,9 +35,13 @@ class EstablishmentMapNotifier extends StateNotifier<Map<String,Establishment>> 
     if ( state[establishmentId] != null ) return;
 
     final token = await keyValueStorageService.getValue<String>('token');
-
-    final establishment = await getEstablishment( token??"d", establishmentId );
-    state = { ...state, establishmentId: establishment };
+    try {
+      final establishment = await getEstablishment( token??"d", establishmentId );
+      state = { ...state, establishmentId: establishment };
+    } catch (e) {
+      return;
+    }
+    
   }
 
   Future<void> saveRating( String establishmentId, int rating ) async {

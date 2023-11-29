@@ -1,19 +1,17 @@
+import 'package:farrap/presentation/providers/filter_provider.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CustomSwitch extends StatelessWidget {
+class CustomSwitch extends ConsumerWidget {
   final String label;
-  final Function(bool)? onChanged;
-  final bool value;
 
   const CustomSwitch({
     super.key, 
-    required this.label, 
-    this.onChanged, 
-    required this.value
+    required this.label
   });
 
   @override
-  Widget build(BuildContext context) {
+  Widget build(BuildContext context, WidgetRef ref) {
     return Padding(
       padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 7),
       child: Row(
@@ -32,9 +30,9 @@ class CustomSwitch extends StatelessWidget {
               child: Container(
                 alignment: Alignment.centerRight,
                 child: Switch(
-                  value: value,
+                  value: ref.watch(filterProvider).flag,
                   activeColor: Colors.blue,
-                  onChanged: onChanged,
+                  onChanged: ref.read(filterProvider.notifier).onFlagChange,
                 ),
               ),
             )

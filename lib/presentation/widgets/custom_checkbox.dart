@@ -1,17 +1,11 @@
 import 'package:flutter/material.dart';
 
-class CustomCheckBox extends StatefulWidget {
-  const CustomCheckBox({super.key});
+class CustomCheckBox extends StatelessWidget {
 
-  @override
-  State<CustomCheckBox> createState() => _CustomCheckBoxState();
-}
+  final Filter selectedFilter;
+  final Function(Filter?)? onChange;
 
-enum Filter { asc, rating, dec}
-
-class _CustomCheckBoxState extends State<CustomCheckBox> {
-  bool wantsBreakfast = true;
-  Filter selectedFilter = Filter.asc;
+  CustomCheckBox({super.key, required this.selectedFilter, required this.onChange});
 
   @override
   Widget build(BuildContext context) {
@@ -22,27 +16,24 @@ class _CustomCheckBoxState extends State<CustomCheckBox> {
           title: const Text('Alfabeticamente ascendente'),
           value: Filter.asc,
           groupValue: selectedFilter,
-          onChanged: (value) => setState(() {
-            selectedFilter = Filter.asc;
-          }),
+          onChanged: onChange
         ),
         RadioListTile(
           title: const Text('Alfabeticamente descendente'),
           value: Filter.dec,
           groupValue: selectedFilter,
-          onChanged: (value) => setState(() {
-            selectedFilter = Filter.dec;
-          }),
+          onChanged: onChange
         ),
         RadioListTile(
           title: const Text('Rating'),
           value: Filter.rating,
           groupValue: selectedFilter,
-          onChanged: (value) => setState(() {
-            selectedFilter = Filter.rating;
-          }),
+          onChanged: onChange
         ),
       ],
     );
   }
 }
+
+enum Filter { asc, rating, dec}
+

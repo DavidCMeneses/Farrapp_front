@@ -21,7 +21,7 @@ typedef EstablishmentCallBack = Future<EstablishmentResult> Function(String toke
                                                           String musicFilter, 
                                                           String establishmentFilter,
                                                           String sortedBy,
-                                                          bool flag, 
+                                                          String flag, 
                                                           int page);
 
 class HomeNotifier extends StateNotifier<EstablishmentResult> {
@@ -35,7 +35,13 @@ class HomeNotifier extends StateNotifier<EstablishmentResult> {
     required this.keyValueStorageService,
   }) : super(EstablishmentResult(totalPages: 1, establishments: []));
 
-  Future<void> loadNextPage() async {
+  Future<void> applyFilters(String? query) async {
+    currentPage = 0;
+    state = EstablishmentResult(totalPages: 1, establishments: []);
+    await loadNextPage(query);
+  }
+
+  Future<void> loadNextPage(String? query) async {
     final token = await keyValueStorageService.getValue<String>('token');
 
     if (isLoading) return;
@@ -44,11 +50,30 @@ class HomeNotifier extends StateNotifier<EstablishmentResult> {
     currentPage++;
     if (currentPage > state.totalPages) return;
 
-    final EstablishmentResult establishmentsResult =
-        await fetchMoreEstablishments(token ?? '', '', '', '', 'asc', true, currentPage);
+    EstablishmentResult establishmentsResult;
+    
+
+    try {
+      if (query != null){
+        final filters = query.split("-");
+        establishmentsResult = await fetchMoreEstablishments(
+          token ?? '', 
+          '', 
+          filters[0], 
+          filters[1], 
+          filters[2], filters[3], currentPage);
+
+      }else {
+        establishmentsResult = await fetchMoreEstablishments(token ?? '', '', '', '', 'asc', "true", currentPage);
+
+      }
+      
+    } catch (e) {
+      return;
+    }
 
     state = state.copyWith(
-        totalpages: establishmentsResult.totalPages,
+        totalpages: 1,
         establishments: [
           ...state.establishments,
           ...establishmentsResult.establishments

@@ -26,7 +26,7 @@ typedef SearchEstablishmentsCallback = Future<EstablishmentResult> Function(Stri
                                                                             String musicFilter, 
                                                                             String establishmentFilter,
                                                                             String sortedBy,
-                                                                            bool flag, 
+                                                                            String flag, 
                                                                             int page);
 
 class SearchedEstablishmentsNotifier extends StateNotifier<List<EstablishmentCard>> {
@@ -43,7 +43,7 @@ class SearchedEstablishmentsNotifier extends StateNotifier<List<EstablishmentCar
 
   Future<List<EstablishmentCard>> searchEstablishmentsByQuery( String query ) async{
     final token = await keyValueStorageService.getValue<String>('token');
-    final EstablishmentResult resultEstablishment = await searchEstablishments(token ?? '', query, '', '', 'asc', false, 1);
+    final EstablishmentResult resultEstablishment = await searchEstablishments(token ?? '', query, '', '', 'asc', "false", 1);
     final List<EstablishmentCard> establishments = resultEstablishment.establishments;
     ref.read(searchQueryProvider.notifier).update((state) => query);
 
