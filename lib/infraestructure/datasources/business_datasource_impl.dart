@@ -12,8 +12,9 @@ import 'package:farrap/infraestructure/models/result_establishment_model.dart';
 class BusinessDatasourceImpl extends BusinessDatasource {
   final dio = Dio(BaseOptions(
       baseUrl: Environment.apiUrl,
-      connectTimeout: const Duration(seconds: 10),
-      receiveTimeout: const Duration(seconds: 10)));
+      connectTimeout: const Duration(seconds: 30),
+      receiveTimeout: const Duration(seconds: 30)
+      ));
 
   @override
   Future<EstablishmentResult> getEstablishmentResultSearch(String token, 

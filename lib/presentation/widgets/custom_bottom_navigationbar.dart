@@ -36,7 +36,7 @@ class CustomBottomNavigation extends ConsumerWidget {
         break;
 
       case 2:
-        context.go('/profile');
+        context.go('/client_profile');
         break;
     }
   }
