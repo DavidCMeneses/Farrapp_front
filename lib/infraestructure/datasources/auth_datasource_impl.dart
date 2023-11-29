@@ -114,6 +114,7 @@ class AuthDataSourceImpl extends AuthDatasource {
   @override
   Future<UserAuth> establishmentRegister(EstablishmentUser user, UserType userType) async {
     final userToSend =  user;
+
     try {
       final response = await dio.post('/api/signup/${userType.name}/', data: {
         'name': userToSend.name,
@@ -125,7 +126,7 @@ class AuthDataSourceImpl extends AuthDatasource {
         "country": 'Colombia',
         "description": userToSend.description,
         "rut": int.parse(userToSend.rut),
-        "image_id": userToSend.imgUrl,
+        "image_url": userToSend.imgUrl,
         "playlist_id": userToSend.playlist,
         "verified": "false",
         "categories": userToSend.preferences.map(

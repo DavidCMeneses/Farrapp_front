@@ -20,7 +20,7 @@ class ResultEstablishment {
     });
 
     factory ResultEstablishment.fromJson(Map<String, dynamic> json) => ResultEstablishment(
-        totalPages: json["total_pages"],
+        totalPages: json["pages"],
         results: List<Result>.from(json["results"].map((x) => Result.fromJson(x))),
     );
 
@@ -53,13 +53,13 @@ class Result {
 
     factory Result.fromJson(Map<String, dynamic> json) => Result(
         name: json["name"],
-        id: json["id"],
+        id: '${json["id"]}',
         address: json["address"],
         city: json["city"],
-        preference: json["preference"],
-        rating: json["rating"].toDouble(),
+        preference: json["preferences"],
+        rating: json["rating"] + 0.0,
         imageUrl: json["image_url"],
-        currentSong: CurrentSong.fromJson(json["current_song"]),
+        currentSong: CurrentSong.fromJson(json["song"]),
     );
 
     Map<String, dynamic> toJson() => {
@@ -77,15 +77,18 @@ class Result {
 class CurrentSong { 
     final String name;
     final String author;
+    final String? url;
 
     CurrentSong({
         required this.name,
         required this.author,
+        this.url
     });
 
     factory CurrentSong.fromJson(Map<String, dynamic> json) => CurrentSong(
-        name: json["name"],
-        author: json["author"],
+        name: json["track_name"],
+        author: json["artist_name"],
+        url: json["track_url"],
     );
 
     Map<String, dynamic> toJson() => {

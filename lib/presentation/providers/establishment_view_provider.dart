@@ -16,8 +16,13 @@ final homeProvider =
       keyValueStorageService: keyValueStorageService);
 });
 
-typedef EstablishmentCallBack = Future<EstablishmentResult> Function(
-    String token, int page);
+typedef EstablishmentCallBack = Future<EstablishmentResult> Function(String token, 
+                                                          String query, 
+                                                          String musicFilter, 
+                                                          String establishmentFilter,
+                                                          String sortedBy,
+                                                          bool flag, 
+                                                          int page);
 
 class HomeNotifier extends StateNotifier<EstablishmentResult> {
   int currentPage = 0;
@@ -40,7 +45,7 @@ class HomeNotifier extends StateNotifier<EstablishmentResult> {
     if (currentPage > state.totalPages) return;
 
     final EstablishmentResult establishmentsResult =
-        await fetchMoreEstablishments(token ?? '', currentPage);
+        await fetchMoreEstablishments(token ?? '', '', '', '', 'asc', true, currentPage);
 
     state = state.copyWith(
         totalpages: establishmentsResult.totalPages,
