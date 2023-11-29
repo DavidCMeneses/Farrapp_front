@@ -1,3 +1,4 @@
+
 import 'package:farrap/domain/entities/client_user.dart';
 import 'package:farrap/domain/entities/establishment_user.dart';
 import 'package:farrap/domain/entities/user_auth.dart';
@@ -44,7 +45,6 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
     try {
       final user = await authRepository.login(email, password, userType);
-      user.userType = userType;
       user.userType = userType;
       _setLoggedUser( user );
 
@@ -148,9 +148,11 @@ class AuthNotifier extends StateNotifier<AuthState> {
 
   void _setLoggedUser( UserAuth user,  ) async {
     String nameType = user.userType?.name ?? "client";
-    await keyValueStorageService.setKeyValue('token', user.token);
-    await keyValueStorageService.setKeyValue('user_type', nameType);
-    await keyValueStorageService.setKeyValue('user_type', nameType);
+    await keyValueStorageService.setKeyValue<String>('token', user.token);
+    await keyValueStorageService.setKeyValue<String>('user_type', nameType);
+    if (user.id != null) {
+      await keyValueStorageService.setKeyValue<int>('id', user.id ?? 1);
+    }
 
     state = state.copyWith(
       user: user,

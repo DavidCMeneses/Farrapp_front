@@ -1,5 +1,6 @@
 
 import 'package:farrap/config/router/app_router_notifier.dart';
+import 'package:farrap/infraestructure/services/key_value_storage_service_impl.dart';
 import 'package:farrap/presentation/providers/auth_provider.dart';
 import 'package:farrap/presentation/screens/Auth/establishment_register_client_screen.dart';
 import 'package:farrap/presentation/screens/Auth/pre_register_screen.dart';
@@ -13,8 +14,7 @@ import 'package:farrap/presentation/screens/Home/search_screen.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:go_router/go_router.dart';
 
-
-
+final keyValueStorageServiceImpl = KeyValueStorageServiceImpl();
 final goRouterProvider = Provider((ref) {
 
   final goRouterNotifier = ref.read(goRouterNotifierProvider);
@@ -56,7 +56,7 @@ final goRouterProvider = Provider((ref) {
     
     ],
 
-    redirect: (context, state) {
+    redirect: (context, state) async {
       
       final isGoingTo = state.matchedLocation ;
       final authStatus = goRouterNotifier.authStatus;
@@ -69,11 +69,22 @@ final goRouterProvider = Provider((ref) {
         return '/login';
       }
 
+
       if ( authStatus == AuthStatus.authenticated ) {
-        if ( isGoingTo == '/login' || isGoingTo == '/pre_register' || isGoingTo == '/client_register' || isGoingTo == '/establishment_register' ){
-           return '/';
+        if(isGoingTo == '/establishment_register') {
+          return '/';
+        }
+        if ( isGoingTo == '/login' || isGoingTo == '/register' ){
+          
+          final userType = await keyValueStorageServiceImpl.getValue<String>("user_type");
+          if (userType == "establishment"){
+            final userId = await keyValueStorageServiceImpl.getValue<int>("id");
+            return '/establishment/$userId';
+          } 
+          return '/';
         }
       }
+
 
 
       return null;
